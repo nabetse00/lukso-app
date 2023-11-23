@@ -1,8 +1,6 @@
 import { artifacts, ethers, network } from "hardhat";
 import { LSPFactory } from '@lukso/lsp-factory.js';
 import { HardhatEthersSigner } from "@nomicfoundation/hardhat-ethers/signers";
-import { ERC725 } from '@erc725/erc725.js'
-import { ContractFunction } from "hardhat/internal/hardhat-network/stack-traces/model";
 
 export type UniversalProfileData = {
   eoa: HardhatEthersSigner,
@@ -10,7 +8,6 @@ export type UniversalProfileData = {
   universalReceiverDelegateAddress: string,
   keyManagerAddress: string
 }
-
 
 export async function createUP(name = 'Tesnet Universal Profile',
   description = "Testnet Universal Profile for https://app.buidlbox.io/lukso/build-up-2",
@@ -69,12 +66,8 @@ export async function deployContractAsUp(up: UniversalProfileData, contractName:
   const ContractBytecode = contract_artifacts.bytecode;
   const coder = ethers.AbiCoder.defaultAbiCoder()
   const inputs = contract.interface.deploy.inputs
-  var data = coder.encode(inputs, args);
-  // console.log(`deploy => ${contract.interface.deploy.format("minimal")}`)
-  // console.log(`deploy => ${ContractBytecode.slice(0,10)}...`)
-  // console.log(`deploy => ${data.slice(2,10)}...`)
-  // console.log(`deploy => ${coder.decode(["string", "string", "uint256"], data)}`)
-  // get the address of the contract that will be created
+  const data = coder.encode(inputs, args);
+
 
   const value = ContractBytecode + data.slice(2)
   const ContractAddress = await UP.connect(up.eoa)
@@ -138,10 +131,10 @@ export async function executeBatchAsUp(up: UniversalProfileData, contractNames: 
   // const contract = await ethers.getContractFactory(contractName)
   const callDatas = new Array<string>(contractFunctions.length).fill("");
   for (let i = 0; i < contractFunctions.length; i++) {
-  const contract_artifacts = artifacts.readArtifactSync(contractNames[i])
-  const CustomTokenAbi =
-    contract_artifacts.abi;
-  const abiInterface = new ethers.Interface(CustomTokenAbi)
+    const contract_artifacts = artifacts.readArtifactSync(contractNames[i])
+    const CustomTokenAbi =
+      contract_artifacts.abi;
+    const abiInterface = new ethers.Interface(CustomTokenAbi)
     const callData = abiInterface.encodeFunctionData(contractFunctions[i], args[i])
     callDatas[i] = callData
   }
@@ -154,7 +147,7 @@ export async function executeBatchAsUp(up: UniversalProfileData, contractNames: 
     values,
     callDatas,
   );
-  for (let index = 0; index < contractFunctions.length; index++) { 
+  for (let index = 0; index < contractFunctions.length; index++) {
     console.log(`🛠️  Executing %${contractFunctions[index]}% on ${contractNames[index]}[${contractAddresses[index]}] from UP[${up.address}]`);
   }
   return txn
@@ -165,7 +158,7 @@ export function keccak256(val: string): string {
   return ethers.keccak256(enc.encode(val))
 }
 
-export function decodeAbiMetaData(abiStr: string ){
+export function decodeAbiMetaData(abiStr: string) {
   console.log(abiStr)
   const coder = ethers.AbiCoder.defaultAbiCoder()
   const returnedData = coder.decode(["string",], abiStr)
@@ -173,9 +166,9 @@ export function decodeAbiMetaData(abiStr: string ){
   return returnedData
 }
 
-export function LSP2MappingBytes32(nameKey: string, val: string) : string{
-  const hashKeyName = keccak256(nameKey).slice(0,2+ 10*2) + "0000"
-  const mapping = hashKeyName + val.slice(2, 20*2 + 2)
+export function LSP2MappingBytes32(nameKey: string, val: string): string {
+  const hashKeyName = keccak256(nameKey).slice(0, 2 + 10 * 2) + "0000"
+  const mapping = hashKeyName + val.slice(2, 20 * 2 + 2)
 
   return mapping
 }

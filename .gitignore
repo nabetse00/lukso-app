@@ -14,3 +14,4 @@ node_modules
 /coverage.json
 lukso-app.code-workspace
 comands.txt
+.env.dev
