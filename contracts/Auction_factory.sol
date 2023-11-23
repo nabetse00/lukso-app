@@ -2,11 +2,7 @@
 pragma solidity ^0.8.20;
 
 import {Auction, IAuction} from "./Auction.sol";
-// import {IAuctionItems} from "./AuctionItems.sol";
 import {AuctionItems} from "./AuctionItems.sol";
-//import {ILSP8Mintable} from "@lukso/lsp-smart-contracts/contracts/LSP8IdentifiableDigitalAsset/presets/ILSP8Mintable.sol";
-
-// import "@openzeppelin/contracts/token/ERC721/utils/ERC721Holder.sol";
 import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 

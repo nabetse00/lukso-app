@@ -2,7 +2,6 @@
 pragma solidity ^0.8.9;
 
 import {LSP7CompatibleERC20Mintable} from "@lukso/lsp-smart-contracts/contracts/LSP7DigitalAsset/presets/LSP7CompatibleERC20Mintable.sol";
-//import {LSP7Burnable} from "@lukso/lsp-smart-contracts/contracts/LSP7DigitalAsset/extensions/LSP7Burnable.sol";
 
 contract CustomToken is LSP7CompatibleERC20Mintable {
     constructor(
