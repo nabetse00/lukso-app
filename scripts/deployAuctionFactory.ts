@@ -7,7 +7,7 @@ import { CustomToken, UniversalProfile } from '../typechain-types';
 import { createUP } from '../test/helper';
 
 // load env vars
-if (process.env.mode != "prod") {
+if (process.env.mode != "testnet") {
     console.log("loading localnet dev envs")
     dotenv.config({ path: "./.env.dev" });
 } else {
@@ -21,7 +21,7 @@ async function main() {
     let usdcFake: CustomToken
     let daiFake: CustomToken
     let UP: UniversalProfile
-    if (process.env.mode != "prod") {
+    if (process.env.mode != "testnet") {
         EOA_PRIVATE_KEY = process.env.LOCALNET_EOA_PRIVATE_KEY as string
         const customTokenFactory = await ethers.getContractFactory("CustomToken")
         const initialSupply = ethers.parseEther("100000000")
@@ -33,7 +33,7 @@ async function main() {
 
         const UPData = await createUP("test UP 1", "", [], [])
         UP = await ethers.getContractAt("UniversalProfile", UPData.address)
-    
+
         // console.log(process.env.LOCALNET_RPC_URL)
         const provider = new ethers.JsonRpcProvider(
             process.env.LOCALNET_RPC_URL,
@@ -43,9 +43,9 @@ async function main() {
 
     } else {
         EOA_PRIVATE_KEY = process.env.TESTNET_EOA_PRIVATE_KEY as string
-        const USDC_ADDR = process.env.TESTNET_FAKE_USDC_ADDR as string
-        const DAI_ADDR = process.env.TESTNET_FAKE_DAI_ADDR as string
-        const UP_ADDR = process.env.TESTNET_UP_ADDR as string 
+        const USDC_ADDR = process.env.TESTNET_MOCK_USDC_ADDR as string
+        const DAI_ADDR = process.env.TESTNET_MOCK_DAI_ADDR as string
+        const UP_ADDR = process.env.TESTNET_UP_ADDR as string
         usdcFake = await ethers.getContractAt("CustomToken", USDC_ADDR)
         daiFake = await ethers.getContractAt("CustomToken", DAI_ADDR)
         UP = await ethers.getContractAt("UniversalProfile", UP_ADDR)
@@ -59,7 +59,7 @@ async function main() {
     const daiAddr = await daiFake.getAddress()
     console.log(`🆙 fake usdc token deployed at: ${usdcAddr}`);
     console.log(`🆙 fake dai token deployed at: ${daiAddr}`);
-    
+
     // Auction factory contract
     const auctionFactory_Factory = await ethers.getContractFactory("AuctionFactory")
     const UpAddr = await UP.getAddress()
@@ -67,7 +67,7 @@ async function main() {
     const auctionFactory = await auctionFactory_Factory.connect(signer).deploy(usdcAddr, daiAddr, UpAddr);
     await auctionFactory.waitForDeployment()
     const filePath = './contracts.txt'
-    const prefix = process.env.mode != "prod"? "LOCALNET": "TESTNET"
+    const prefix = process.env.mode != "testnet" ? "LOCALNET" : "TESTNET"
     const auctionFactoryAddr = await auctionFactory.getAddress()
     console.log(`🆙${prefix}_AUCTION_FACTORY_ADDR="${auctionFactoryAddr}"`);
     appendFileSync(filePath, `${prefix}_AUCTION_FACTORY_ADDR="${auctionFactoryAddr}"\n`);

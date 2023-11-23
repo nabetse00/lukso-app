@@ -2,30 +2,26 @@ import dotenv from 'dotenv';
 import { ethers } from "hardhat"
 import { Wallet } from 'ethers';
 import { HardhatEthersSigner } from '@nomicfoundation/hardhat-ethers/signers';
-import { appendFileSync} from 'fs';
+import { appendFileSync } from 'fs';
 
 // load env vars
-if (process.env.mode != "prod"){
-    console.log("loading dev envs")
-    dotenv.config({path:"./.env.dev"});
-}else{
-    console.log("production")
+if (process.env.mode != "testnet") {
+    console.log("loading localnet envs")
+    dotenv.config({ path: "./.env.dev" });
+} else {
+    console.log("loading testnet envs")
+    dotenv.config();
 }
 
-async function main(){
+async function main() {
     let EOA_PRIVATE_KEY = ""
     let signer: Wallet | HardhatEthersSigner
-    if(process.env.mode != "prod"){
+    if (process.env.mode != "testnet") {
         EOA_PRIVATE_KEY = process.env.LOCALNET_EOA_PRIVATE_KEY as string
-        // console.log(process.env.LOCALNET_RPC_URL)
-        const provider = new ethers.JsonRpcProvider(
-            process.env.LOCALNET_RPC_URL,
-        );
+        [signer] = await ethers.getSigners()
 
-        [ signer ] =  await ethers.getSigners()
-
-    }else{
-        EOA_PRIVATE_KEY =  process.env.TESTNET_EOA_PRIVATE_KEY as string
+    } else {
+        EOA_PRIVATE_KEY = process.env.TESTNET_EOA_PRIVATE_KEY as string
         const provider = new ethers.JsonRpcProvider(
             process.env.TESTNET_RPC_URL,
         );
@@ -43,9 +39,9 @@ async function main(){
 
     console.log(`🆙 fake usdc token deployed at: ${await usdcFake.getAddress()}`);
     console.log(`🆙 fake dai token deployed at: ${await daiFake.getAddress()}`);
-    
+
     const filePath = './contracts.txt'
-    appendFileSync(filePath, `FAKE_USDC_ADDR="${await usdcFake.getAddress()}"\n`, );
+    appendFileSync(filePath, `FAKE_USDC_ADDR="${await usdcFake.getAddress()}"\n`,);
     appendFileSync(filePath, `FAKE_DAI_ADDR="${await daiFake.getAddress()}"\n`);
 
 }
