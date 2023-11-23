@@ -11,9 +11,11 @@ import "@openzeppelin/contracts/access/Ownable.sol";
  * @author Nabetse
  * @notice On createAuction Adds new Auctions
  * @notice A flat fee is applied when creating an Auction.
- * @notice transfers items as LSP8 nfts to auction vault
+ * @notice So `FLAT_FEE` tokens are transfered to the contract on auction creation
+ * @notice Transfers items as LSP8 nfts to auction contract
+ * @notice Allowed tokens are USDC and DAI
  */
-contract AuctionFactory is IAuction, Ownable{
+contract AuctionFactory is IAuction, Ownable {
     address public immutable USDC_ADDR;
     address public immutable DAI_ADDR;
     address payable public immutable AUCTION_ITEMS_ADDR;
@@ -29,21 +31,28 @@ contract AuctionFactory is IAuction, Ownable{
 
     /**
      * Create Auction Factory
-     * @param _usdToken USD token address
+     * @param _usdToken USDC token address
      * @param _daiToken DAI token adress
      * @param factoryOwner factory owner
      */
-    constructor(
-        address _usdToken,
-        address _daiToken,
-        address factoryOwner
-    ) {
+    constructor(address _usdToken, address _daiToken, address factoryOwner) {
         USDC_ADDR = _usdToken;
         DAI_ADDR = _daiToken;
         AUCTION_ITEMS_ADDR = payable(address(new AuctionItems(address(this))));
         _transferOwnership(factoryOwner);
     }
 
+    /**
+     * creates an Auction Contract
+     * @dev _bidToken is treated as ERC20 token in order to reduce
+     * auction factory contract size. Nevertheless it's a LSP7 token
+     * @param _bidToken token allowed [USDC or DAI]
+     * @param _itemOwner item owner
+     * @param itemUri uri
+     * @param _startingPrice start price for auction in tokens
+     * @param _buyItNowPrice buy it now price in tokens
+     * @param _duration [1 hour to 7 days] auction duration
+     */
     function createAuction(
         address _bidToken,
         address _itemOwner,
@@ -98,23 +107,35 @@ contract AuctionFactory is IAuction, Ownable{
         emit AuctionCreated(newAuction, msg.sender, auctions.length);
     }
 
+    /**
+     * gets this factory Auctions
+     */
     function getAuctions() public view returns (Auction[] memory) {
         return auctions;
     }
 
-    function withdrawFees(
-        address payable receiver
-    ) public onlyOwner {
+    /**
+     * Factory owner can withdraw token fees
+     * in USDC and DAI tokens
+     * @param receiver address to receive tokens
+     */
+    function withdrawFees(address payable receiver) public onlyOwner {
         require(receiver != address(0));
         uint256 bal = IERC20Metadata(USDC_ADDR).balanceOf(address(this));
         if (bal > 0) {
             bool success = IERC20Metadata(USDC_ADDR).transfer(receiver, bal);
-            require(success, "[Auction Factory] Withdraw Fees Failed to send DAI");
+            require(
+                success,
+                "[Auction Factory] Withdraw Fees Failed to send DAI"
+            );
         }
         bal = IERC20Metadata(DAI_ADDR).balanceOf(address(this));
         if (bal > 0) {
-            bool success = IERC20Metadata(DAI_ADDR).transfer( receiver, bal);
-            require(success, "[Auction Factory] Withdraw Fees Failed to send DAI");
+            bool success = IERC20Metadata(DAI_ADDR).transfer(receiver, bal);
+            require(
+                success,
+                "[Auction Factory] Withdraw Fees Failed to send DAI"
+            );
         }
         bal = address(this).balance;
         if (bal > 0) {
@@ -123,6 +144,15 @@ contract AuctionFactory is IAuction, Ownable{
         }
     }
 
+    /**
+     * This function converts all tokens values in 18 decimals
+     * to value in token decimals
+     * @notice LSP7 is 18 decimal but this can be
+     * changed to mimic, for example, USDC [ethereum network] 6 decimals
+     * @param bidToken token address
+     * @param valueInEth value in ethers ie 18 decimals
+     * @return value in tokens decimals
+     */
     function _valueToTokens(
         address bidToken,
         uint256 valueInEth

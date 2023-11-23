@@ -167,9 +167,9 @@ export function decodeAbiMetaData(abiStr: string) {
 }
 
 export function LSP2MappingBytes32(nameKey: string, val: string): string {
+  // see https://github.com/lukso-network/LIPs/blob/main/LSPs/LSP-2-ERC725YJSONSchema.md#mapping
   const hashKeyName = keccak256(nameKey).slice(0, 2 + 10 * 2) + "0000"
   const mapping = hashKeyName + val.slice(2, 20 * 2 + 2)
-
   return mapping
 }
 

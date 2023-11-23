@@ -37,7 +37,7 @@ interface IAuction {
  * @author Nabetse
  * @notice Auction contract suport a starting price, buy it now price.
  * @notice Auction items represented has LSP8 NFTS.
- * @notice Bid increments from ebay (see https://www.ebay.com/help/buying/bidding/automatic-bidding?id=4014)
+ * @notice Bid increments from inspired from ebay (see https://www.ebay.com/help/buying/bidding/automatic-bidding?id=4014)
  * @notice step function in ether units.
  * @notice Internal function changes bid increments to acomodate bidToken decimals (minimal 2 decimals)
  * @notice Included rescue function allows tokens and eth retreival 120 day after bid end
@@ -236,6 +236,19 @@ contract Auction is IAuction, ReentrancyGuard {
         return fundsByBidder[highestBidder];
     }
 
+    /**
+     * Place a bid for an item
+     * @notice In case bid does over bid binding bid but not highest bid. Incements the binding
+     * bid acording to config tiers or sets to highest bid in case 
+     * highest bid < binding bid + increment 
+     * @notice In case bid doesn't over bid highest bid tokens remain inside this contract until
+     * the auction ends or is canceled. This is  way to ensure comitment to a bid and not just
+     * a bid to raise binding bid up to highest bid.
+     * @notice if bid > buy it now price. Auctions end and tokens ara transfered back to bidders
+     * winning bidder get item nft as a reciep and seller gets tokens 
+     * @param _bidder bidder address 
+     * @param _tokenAmount amount to bid
+     */
     function placeBid(
         address _bidder,
         uint256 _tokenAmount
@@ -540,7 +553,7 @@ contract Auction is IAuction, ReentrancyGuard {
         if (_to == config.owner) {
             require(
                 _withdrawalAmount <= highestBindingBid,
-                "[AUction] owner cannot withdraw more than binding bid"
+                "[Auction] owner cannot withdraw more than binding bid"
             );
             highestBindingBid = 0;
         }

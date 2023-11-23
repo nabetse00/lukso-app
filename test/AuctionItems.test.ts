@@ -3,9 +3,7 @@ import {
 } from "@nomicfoundation/hardhat-toolbox/network-helpers";
 import { expect } from "chai";
 import { ethers, network } from "hardhat";
-import { LSP2MappingBytes32, createUP, decodeAbiMetaData, deployContractAsUp, executeAsUp, keccak256 } from "./helper";
-import { abi as UP_ABI } from '@lukso/lsp-smart-contracts/artifacts/UniversalProfile.json';
-import { ERC725YDataKeys, LSP1_TYPE_IDS } from '@lukso/lsp-smart-contracts';
+import { LSP2MappingBytes32, createUP, executeAsUp, keccak256 } from "./helper";
 
 const auctionItemContractName = "AuctionItems"
 const customUrdContractName = "CustomUniversalReceiverDelegate"

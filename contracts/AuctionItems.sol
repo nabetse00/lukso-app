@@ -122,18 +122,29 @@ contract AuctionItems is LSP8Mintable, LSP8Burnable {
         return tokenId;
     }
 
+    /**
+     * Safe mint for compatibility
+     * @param to mint to
+     * @param uri token uri
+     */
     function safeMint(
         address to,
         bytes memory uri
     ) public onlyOwner returns (bytes32) {
         bytes32 tokenId = createAuctionItem(to, "");
         bytes32 key = bytes32(bytes20(tokenId));
-        key = key >> 96; // 12 bytes prefix * 8 = 96 
+        key = key >> 96; // 12 bytes prefix * 8 = 96
         key = bytes32(_LSP8_METADATA_TOKEN_URI_PREFIX) | key;
         _setData(key, abi.encodePacked(BASE_URI_HASH, uri));
         return tokenId;
     }
 
+    /**
+     * safeTransferFrom for compatibility
+     * @param from address from
+     * @param to address to
+     * @param tokenId token id to transfer
+     */
     function safeTransferFrom(
         address from,
         address to,
@@ -142,14 +153,16 @@ contract AuctionItems is LSP8Mintable, LSP8Burnable {
         _transfer(from, to, tokenId, true, "");
     }
 
+    /**
+     * gets nft URI from storage
+     * @param tokenId tokenId
+     * @return bytes4(hashSig) + bytes32(tokenUri) 
+     */
     function getTokenUri(bytes32 tokenId) public view returns (string memory) {
         bytes32 key = bytes32(bytes20(tokenId));
         key = key >> 96; // 12 bytes prefix * 8 = 96
         key = bytes32(_LSP8_METADATA_TOKEN_URI_PREFIX) | key;
         bytes memory data = _getData(key);
-        // offset = bytes4(hashSig) + bytes32(contentHash) -> 4 + 32 = 36
-        //uint256 offset = 36;
-
         return string(data);
     }
 

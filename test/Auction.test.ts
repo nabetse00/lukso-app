@@ -2,9 +2,6 @@ import { expect } from "chai";
 import {
     loadFixture,
 } from "@nomicfoundation/hardhat-toolbox/network-helpers";
-// import * as hre from "hardhat";
-// import { FLAT_FEE_DAI, FLAT_FEE_USDC, PRIVATE_KEY, deployContract, estimateFeeApprovalGas, estimateCreateAuctionGas, estimatePlaceBidGas, estimateAuctionApprovalGas, fundAccount, } from "./utils";
-// import { Address } from "zksync-web3/build/src/types";
 import { network, ethers } from "hardhat";
 import { createUP, executeAsUp, executeBatchAsUp, keccak256 } from "./helper";
 

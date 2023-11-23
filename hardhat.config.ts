@@ -66,11 +66,11 @@ const config: HardhatUserConfig = {
     currency: 'EUR',
     coinmarketcap: process.env.COINBASE_API_KEY,
     enabled: (process.env.REPORT_GAS) ? true : false,
-    // outputFile: "report-gas-temp.txt",
-    // noColors: true,
+    outputFile: "report-gas-lukso.txt",
+    noColors: true,
     // for lukso mainet estimation
     token: "LYX",
-    // gasPrice: 2,
+    gasPrice: 2, // nov 23 => was between 1-2 Gwei 12s per block 
   }
 };
 

@@ -12,14 +12,7 @@ import {ERC165Checker} from "@openzeppelin/contracts/utils/introspection/ERC165C
 import {_INTERFACEID_LSP0} from "@lukso/lsp-smart-contracts/contracts/LSP0ERC725Account/LSP0Constants.sol";
 
 /**
- * @title Auction contract
- * @author Nabetse
- * @notice Auction contract suport a starting price, buy it now price.
- * @notice Auction items represented has LSP8 NFTS.
- * @notice Bid increments from ebay (see https://www.ebay.com/help/buying/bidding/automatic-bidding?id=4014)
- * @notice step function in ether units.
- * @notice Internal function changes bid increments to acomodate bidToken decimals (minimal 2 decimals)
- * @notice Included rescue function allows tokens and eth retreival 120 day after bid end
+ * @title Auction Abstract contract
  */
 abstract contract AuctionAbstract {
     function getHighestBid() public virtual view returns (uint256);
