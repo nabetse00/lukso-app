@@ -24,7 +24,7 @@ export function Component() {
             </div>
 
             <div className="flex flex-wrap my-6 justify-center">
-                <div className="mx-6 card w-96 bg-neutral text-neutral-content">
+                <div className="m-6 card w-96 bg-neutral text-neutral-content">
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Dispenser</h2>
                         <p>Use this dispenser to get some mUSDC or mDAI tokens</p>
@@ -35,7 +35,7 @@ export function Component() {
                     </div>
                 </div>
 
-                <div className="mx-6 card w-96 bg-neutral text-neutral-content">
+                <div className="m-6 card w-96 bg-neutral text-neutral-content">
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Buyer ?</h2>
                         <p>Check our Auctions.</p>
@@ -45,7 +45,7 @@ export function Component() {
                     </div>
                 </div>
 
-                <div className="mx-6 card w-96 bg-neutral text-neutral-content">
+                <div className="m-6 card w-96 bg-neutral text-neutral-content">
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Seller ?</h2>
                         <p>Create a new Auction</p>
