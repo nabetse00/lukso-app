@@ -29,8 +29,8 @@ export function Component() {
                         <h2 className="card-title">Dispenser</h2>
                         <p>Use this dispenser to get some mUSDC or mDAI tokens</p>
                         <div className="card-actions justify-end">
-                            <button onClick={() => navigate('/dispenser')} className="btn btn-primary">Get mUsdc</button>
-                            <button onClick={() => navigate('/dispenser')} className="btn btn-secondary">Get mDai</button>
+                            <button onClick={() => navigate('/lukso-app/dispenser')} className="btn btn-primary">Get mUsdc</button>
+                            <button onClick={() => navigate('/lukso-app/dispenser')} className="btn btn-secondary">Get mDai</button>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@ export function Component() {
                         <h2 className="card-title">Buyer ?</h2>
                         <p>Check our Auctions.</p>
                         <div className="card-actions justify-end">
-                            <button onClick={() => navigate('/auctions')} className="btn btn-primary">Go to Auction</button>
+                            <button onClick={() => navigate('/lukso-app/auctions')} className="btn btn-primary">Go to Auction</button>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ export function Component() {
                         <h2 className="card-title">Seller ?</h2>
                         <p>Create a new Auction</p>
                         <div className="card-actions justify-end">
-                            <button onClick={() => navigate('/auctions')} className="btn btn-primary">Create a new Auction</button>
+                            <button onClick={() => navigate('/lukso-app/auctions')} className="btn btn-primary">Create a new Auction</button>
                         </div>
                     </div>
                 </div>
