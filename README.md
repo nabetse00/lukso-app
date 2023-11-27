@@ -23,7 +23,7 @@ The example app is an item auction with a one clic buy it now button.
 Please follow: 
 - [Video](https://www.youtube.com/watch?v=xxxx) 
 - [Demo site github page here](https://nabetse00.github.io/lukso-app)
-Don't forget to deactivate your Adblocker !
+Don't forget to deactivate your Adblocker and install Universal Profile extension!
 
 
 ## Project structure

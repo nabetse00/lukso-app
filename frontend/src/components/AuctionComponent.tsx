@@ -48,6 +48,11 @@ export default function AuctionComponent({ auction, update }: Props) {
                 setEnded(true)
             }
 
+            if(Number(auction.status) == 2){
+                setEnded(true)
+            }
+
+
             if (bid.length == 0) {
                 const initial = ethers.parseEther(auction.min_imcrement) + ethers.parseEther(auction.bidderBid)
                 setBid(ethers.formatEther(initial))
@@ -96,14 +101,13 @@ export default function AuctionComponent({ auction, update }: Props) {
                 </h2>
                 <p>{auction.data.product_description}</p>
                 <p>{format_price(auction.data.product_buy_it_price)}</p>
-
                 <div className="stats bg-neutral-900">
                     <div className="stat">
                         <div className="stat-title">Current bid</div>
                         <div className="stat-value">{format_price(auction.bid)}</div>
                         <div className="stat-desc">Starting at {format_price(auction.data.product_start_price)}</div>
                     </div>
-                    <CountDown endDate={auction.data.product_end_date} />
+                    <CountDown endDate={auction.data.product_end_date} isEnded={ended} />
                 </div>
 
 

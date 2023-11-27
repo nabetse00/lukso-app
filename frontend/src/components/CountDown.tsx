@@ -2,13 +2,14 @@ import { useEffect, useState } from "react"
 
 interface Props {
     endDate: Date
+    isEnded: boolean
 }
 
 function format_date(date: Date) {
     return new Date(date).toLocaleString()
 }
 
-export default function CountDown({ endDate }: Props) {
+export default function CountDown({ endDate, isEnded }: Props) {
     const [ended, setEnded] = useState(false)
     const [hours, setHours] = useState(0)
     const [minutes, setMinutes] = useState(0)
@@ -43,7 +44,7 @@ export default function CountDown({ endDate }: Props) {
         <div className="stat">
             <div className="stat-title">Ends in</div>
             <div className="stat-value">
-                {!ended ?
+                {(!ended && !isEnded)?
                     <span className="countdown">
                         {/*// @ts-ignore */}
                         <span style={{ "--value": hours }}></span>:
@@ -56,7 +57,7 @@ export default function CountDown({ endDate }: Props) {
                     <span> Ended </span>
                 }
             </div>
-            <div className="stat-desc">{!ended ? "Ends on " : "Ended on "} {format_date(endDate)}</div>
+            <div className="stat-desc">{(!ended && !isEnded )? "Ends on " : "Ended on "} {format_date(endDate)}</div>
         </div>
     )
 }
