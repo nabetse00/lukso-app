@@ -49,9 +49,9 @@ jobs:
         run: npm run build
         env:
           VITE_PINATA_API_KEY: "${{ secrets.VITE_PINATA_API_KEY }}"
-          VITE_PINATA_API_SECRET: "${{ secrets.VITE_WEB3_API }}"
-          VITE_TESTNET_AF_ADDR: "${{ secrets.VITE_WEB3_API }}"
-          VITE_PINATA_JWT: "${{ secrets.VITE_WEB3_API }}"
+          VITE_PINATA_API_SECRET: "${{ secrets.VITE_PINATA_API_SECRET }}"
+          VITE_TESTNET_AF_ADDR: "${{ secrets.VITE_TESTNET_AF_ADDR }}"
+          VITE_PINATA_JWT: "${{ secrets.VITE_PINATA_JWT }}"
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
