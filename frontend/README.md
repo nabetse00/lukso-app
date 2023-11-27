@@ -20,8 +20,11 @@ http://localhost:5173/
 
 # demo url
 
-[github page here](https://nabetse00.github.io/lukso-app)
+[github demo page ](https://nabetse00.github.io/lukso-app)
 Don't forget to deactivate your Adblocker !
+
+# demo video
+[video](https://youtu.be/9zfBIr0yYic)
 
 # Screenshots
 

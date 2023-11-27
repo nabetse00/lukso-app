@@ -16,13 +16,12 @@ This project showcases features of lukso Universal Profiles.
 - Universal Profiles batch execution: one clic for approval and execution.
 - Universal Profiles: use  Universal Receiver Delegate for notifications.
 - LSP8 NFTS: items are represented as unique LSP8 NFTS for better interaction with Universal Profiles. 
-- LSP7 Tokens: items are payed with LSP7 tokens for better interaction with Universal Profiles.
-
-The example app is an item auction with a one clic buy it now button.
+- LSP7 Tokens: items are paid with LSP7 tokens for better interaction with Universal Profiles.
+- one clic buy it now button.
 
 Please follow: 
 - [Video](https://youtu.be/9zfBIr0yYic) 
-- [Demo site github page here](https://nabetse00.github.io/lukso-app)
+- [Demo site github page](https://nabetse00.github.io/lukso-app)
 Don't forget to deactivate your Adblocker and install Universal Profile extension!
 
 
@@ -178,5 +177,5 @@ npx hardhat verify "0x0BC186C5A0bC200958aaA3c8c10C02590D874aEf" --network luksoT
 
 Check [REAME](./frontend/README.md) inside `./frontend` folder.
 
-Demo web site is also deployed [here](http://whatever)
+Demo web site is also deployed [here](https://nabetse00.github.io/lukso-app/)
 
