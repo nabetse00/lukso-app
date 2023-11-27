@@ -9,12 +9,15 @@ export function Component() {
 
     useEffect(
         () => {
-            getProfileData(wallet!).then(
-                (l) => {
-                    console.log("done metadata")
-                    setNfts(l)
+            if(wallet?.provider){
+
+                getProfileData(wallet!).then(
+                    (l) => {
+                        console.log("done metadata")
+                        setNfts(l)
+                    }
+                    )
                 }
-            )
         },
         [wallet?.provider]
     )
