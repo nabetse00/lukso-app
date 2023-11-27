@@ -28,10 +28,15 @@ export default function CountDown({ endDate, isEnded }: Props) {
                         clearInterval(inter)
                         setEnded(true)
                     }
-                    let asDeltaDate = new Date(delta);
-                    setHours(asDeltaDate.getHours())
-                    setMinutes(asDeltaDate.getMinutes())
-                    setSeconds(asDeltaDate.getSeconds())
+                    // let asDeltaDate = new Date(delta);
+                    const deltaSec = Math.floor(delta/1000)
+                    const sec = deltaSec % 60
+                    let q = Math.floor(deltaSec/60) 
+                    const min = q % 60
+                    const hours = Math.floor( q /60)
+                    setHours(hours)
+                    setMinutes(min)
+                    setSeconds(sec)
 
                 }, 1000)
             } else {
