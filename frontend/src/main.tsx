@@ -43,6 +43,12 @@ let routes = createRoutesFromElements(
           () => import("./pages/AuctionsPage")
         }
       />
+      <Route
+        path="/lukso-app/nft-data"
+        lazy={
+          () => import("./pages/NftPage")
+        }
+      />
   </Route>
 );
 
@@ -63,6 +69,10 @@ export const menu: Menu = [
   {
     path: "/lukso-app/auctions/create",
     description: "Create Auctions"
+  },
+  {
+    path: "/lukso-app/nft-data",
+    description: "Nft Data"
   },
 
 ]
