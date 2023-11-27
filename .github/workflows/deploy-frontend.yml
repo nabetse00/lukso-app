@@ -39,6 +39,8 @@ jobs:
         run: npm install
       - name: Compile contracts
         run: npx hardhat compile
+        env:
+          TESTNET_EOA_PRIVATE_KEY: "${{ secrets.TESTNET_EOA_PRIVATE_KEY }}"
       - name: Install dependencies
         working-directory: ./frontend
         run: npm install

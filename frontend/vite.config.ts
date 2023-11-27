@@ -6,7 +6,7 @@ import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base:"/REPO/",
+  base:"/lukso-app/",
   plugins: [react()],
   optimizeDeps: {
     esbuildOptions: {

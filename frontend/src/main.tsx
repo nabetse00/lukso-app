@@ -13,7 +13,7 @@ import { Menu } from './types/models.ts';
 let routes = createRoutesFromElements(
   <Route element={<App />}
     errorElement={<RouterError />}>
-    <Route path="/REPO"
+    <Route path="/lukso-app"
       id="main"
       lazy={() => import("./pages/MainPage")} />
     <Route
