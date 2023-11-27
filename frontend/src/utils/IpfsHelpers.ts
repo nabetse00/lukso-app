@@ -2,8 +2,10 @@ import axios from "axios"
 import { AuctionJson } from "../types/models";
 const JWT = `Bearer ${import.meta.env.VITE_PINATA_JWT}`
 
-export async function axiosToIpfs(selectedFile: File) {
 
+
+export async function axiosToIpfs(selectedFile: File) {
+    console.log(JWT)
     const formData = new FormData();
 
     formData.append('file', selectedFile);
