@@ -64,7 +64,7 @@ Lukso tesnet deployed contract:
 
 
 Remember AuctionFactory creates its own NFT representing Auctions items:
-[0xXXXXXX](https://xxx.cpm)
+[0xb8608c56509f880e5b071ad31019ed2c42d5bc98](https://explorer.execution.testnet.lukso.network/address/0xb8608c56509f880e5b071ad31019ed2c42d5bc98)
 
 And Auction contracts are added when you create an `Auction`.
 
@@ -174,8 +174,9 @@ npx hardhat verify "0x1dBC835aA6f1889842dE9e0e2a64E54d15C62a11" --network luksoT
 npx hardhat verify "0x0BC186C5A0bC200958aaA3c8c10C02590D874aEf" --network luksoTestnet --constructor-args .\auction_factory_arguments.js
 ```
 
-
-
-
 # Front end
+
+Check [REAME](./frontend/README.md) inside `./frontend` folder.
+
+Demo web site is also deployed [here](http://whatever)
 

@@ -1,30 +1,36 @@
-# React + TypeScript + Vite
+# Front end
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Copy [./.env.template](./.env.template) and fill it with your data.
 
-Currently, two official plugins are available:
+You wil need a pinata api key and jwt in order to upload files to ipfs. See [https://www.pinata.cloud](https://www.pinata.cloud) for details
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+Then install
+```
+> npm i 
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+And run
+```
+npm run dev
+```
+Dev server should be at
+```
+http://localhost:5173/
+```
+
+# demo url
+
+[here](http://xxxx.com)
+
+# Screenshots
+
+
+- Main ![demo site 1](../screenshots/screen1.png)
+
+- Connect ![demo site 2](../screenshots/screen2.png)
+- Choose universal profile ![demo site 3](../screenshots/screen3.png)
+- choose a account ![demo site 4](../screenshots/screen4.png)
+- dispense some tokens ![demo site 5](../screenshots/screen5.png)
+- start bidding ![demo site 6](../screenshots/screen6.png)
+- or create an Auction ![demo site 7](../screenshots/screen7.png)
+
