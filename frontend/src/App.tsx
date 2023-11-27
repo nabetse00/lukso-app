@@ -40,6 +40,7 @@ const chains = [
     id: 4201,
     token: "LYXt",
     label: "LUKSO Testnet",
+    // rpcUrl: "https://rpc.testnet.lukso.gateway.fm",
     rpcUrl: "https://rpc.testnet.lukso.network",
   },
 ];

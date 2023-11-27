@@ -2,27 +2,25 @@ import { useRouteError, isRouteErrorResponse } from "react-router-dom";
 import RequireProfile from "../components/RequireUniversalProfile";
 import { useConnectWallet } from "@web3-onboard/react";
 import { WalletState } from "@web3-onboard/core";
-import { dispenseToken } from "../utils/dispenser";
+import { dispenseToken } from "../utils/MockToken";
 import { TESTNET_MOCK_USDC_ADDR, TESTNET_MOCK_DAI_ADDR } from "../types/contracts";
-
 
 export function Component() {
     const [{ wallet }] = useConnectWallet()
-
-    function handleDispenseUsdc(wallet: WalletState): void {
-        dispenseToken(wallet, TESTNET_MOCK_USDC_ADDR)
+    
+    async function handleDispenseUsdc(wallet: WalletState): Promise<void> {
+        await dispenseToken(wallet, TESTNET_MOCK_USDC_ADDR)
         //throw new Error("Function not implemented.");
     }
 
-    function dispenseDAI(wallet: WalletState): void {
-        dispenseToken(wallet, TESTNET_MOCK_DAI_ADDR)
+    async function dispenseDAI(wallet: WalletState): Promise<void> {
+        await dispenseToken(wallet, TESTNET_MOCK_DAI_ADDR)
         // throw new Error("Function not implemented.");
     }
 
     return (
         <RequireProfile>
             <div className="flex flex-wrap my-6 justify-center">
-
                 <div className="m-6 card w-96 bg-neutral text-neutral-content">
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">USDC Dispenser</h2>
@@ -33,7 +31,6 @@ export function Component() {
                         </div>
                     </div>
                 </div>
-
                 <div className="m-6 card w-96 bg-neutral text-neutral-content">
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Dai Dispenser</h2>

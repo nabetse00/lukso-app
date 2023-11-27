@@ -271,7 +271,8 @@ describe("Auction items setup", function () {
 
             // test getTokenUri
             const uri = await auctionItem.getTokenUri(expectedTokenId1)
-            expect(uri).to.be.equal(tokenURI)
+            const uriStr = ethers.toUtf8String(uri)
+            expect(uriStr).to.be.equal(tokenURI)
         });
 
 

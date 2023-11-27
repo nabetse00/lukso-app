@@ -158,12 +158,12 @@ contract AuctionItems is LSP8Mintable, LSP8Burnable {
      * @param tokenId tokenId
      * @return bytes4(hashSig) + bytes32(tokenUri) 
      */
-    function getTokenUri(bytes32 tokenId) public view returns (string memory) {
+    function getTokenUri(bytes32 tokenId) public view returns (bytes memory) {
         bytes32 key = bytes32(bytes20(tokenId));
         key = key >> 96; // 12 bytes prefix * 8 = 96
         key = bytes32(_LSP8_METADATA_TOKEN_URI_PREFIX) | key;
         bytes memory data = _getData(key);
-        return string(data);
+        return data;
     }
 
     // internals

@@ -4,7 +4,7 @@ import App from './App.tsx'
 import './index.css'
 import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements, isRouteErrorResponse, useRouteError } from "react-router-dom";
 import RouterError from './components/RouterError.tsx';
-import { Menu } from './types/menu.ts';
+import { Menu } from './types/models.ts';
 
 
 
@@ -18,55 +18,54 @@ let routes = createRoutesFromElements(
       lazy={() => import("./pages/MainPage")} />
     <Route
       id="dispenser"
-      path="/dispenser"
+      path="dispenser"
       lazy={
         () => import("./pages/DispenserPage")
       }
     />
     <Route
       id='Auctions'
-
-      path="/Auctions"
+      path="auctions"
       lazy={
         () => import("./pages/AuctionsPage")
       }
-    />
-    <Route
-      path="/Auctions/:id"
-      loader={({ params }) => { return params.id! }}
-      lazy={
-        () => import("./pages/AuctionsPage")
-      }
-    />
+      />
+      <Route
+        path="/auctions/create"
+        lazy={
+          () => import("./pages/CreateAuctionPage")
+        }
+      />
+      <Route
+        path="auctions/:id"
+        loader={({ params }) => { return params.id! }}
+        lazy={
+          () => import("./pages/AuctionsPage")
+        }
+      />
   </Route>
 );
 
 
-export const menu:Menu = [
+export const menu: Menu = [
   {
-    path:"/",
-    description:"Home"
+    path: "/",
+    description: "Home"
   },
   {
-    path:"/dispenser",
-    description:"Dispensers"
+    path: "/dispenser",
+    description: "Dispensers"
   },
   {
-    path: "Auctions",
-    description:"Auctions"
+    path: "/auctions",
+    description: "Auctions"
+  },
+  {
+    path: "/auctions/create",
+    description: "Create Auctions"
   },
 
 ]
-
-
-// const regex = /:[^\/]+/gm;
-// routes[0].children!.forEach(el => {
-//   console.log(`path is: ${el.path}\n\n`)
-//   if (el.path && !regex.test(el.path)) {
-//     links.push(el.path)
-//   }
-// });
-
 
 const router = createBrowserRouter(routes);
 

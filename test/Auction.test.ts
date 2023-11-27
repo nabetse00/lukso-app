@@ -111,7 +111,7 @@ describe("Auction Contract Tests", function () {
         expect(metaUriStr).to.be.equal(hashStr + baseUri)
         // get complete uri
         const tokenUriFromAuction = await auctionItem.getTokenUri(itemId)
-        expect(tokenUriFromAuction).to.be.equal(hashStr + tokenUri)
+        expect(ethers.toUtf8String(tokenUriFromAuction)).to.be.equal(hashStr + tokenUri)
 
     });
 
@@ -172,7 +172,7 @@ describe("Auction Contract Tests", function () {
         expect(metaUriStr).to.be.equal(hashStr + baseUri)
         // get complete uri
         const tokenUriFromAuction = await auctionItem.getTokenUri(itemId)
-        expect(tokenUriFromAuction).to.be.equal(hashStr + tokenUri)
+        expect(ethers.toUtf8String(tokenUriFromAuction)).to.be.equal(hashStr + tokenUri)
 
     });
 
@@ -238,7 +238,7 @@ describe("Auction Contract Tests", function () {
         expect(metaUriStr).to.be.equal(hashStr + baseUri)
         // get complete uri
         const tokenUriFromAuction = await auctionItem.getTokenUri(itemId)
-        expect(tokenUriFromAuction).to.be.equal(hashStr + tokenUri)
+        expect(ethers.toUtf8String(tokenUriFromAuction)).to.be.equal(hashStr + tokenUri)
 
         // Place bid as EAO
         let balEOA = await usdc.balanceOf(otherAccount.address)
@@ -333,18 +333,6 @@ describe("Auction Contract Tests", function () {
 
         await expect(bidUpTxn).to.be.reverted
 
-
-
-
-
-
-
-
-
-    });
-
-    it("place a bid for auction in usdc via paymaster", async function () {
-        //await executePlaceBidTransaction(my_auctions[0], otherUserWallet, richTokenWallet, usdc, usdcUsd);
     });
 
 
