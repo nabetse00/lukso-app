@@ -18,26 +18,26 @@ let routes = createRoutesFromElements(
       lazy={() => import("./pages/MainPage")} />
     <Route
       id="dispenser"
-      path="dispenser"
+      path="/lukso-app/dispenser"
       lazy={
         () => import("./pages/DispenserPage")
       }
     />
     <Route
       id='Auctions'
-      path="auctions"
+      path="/lukso-app/auctions"
       lazy={
         () => import("./pages/AuctionsPage")
       }
       />
       <Route
-        path="/auctions/create"
+        path="/lukso-app/auctions/create"
         lazy={
           () => import("./pages/CreateAuctionPage")
         }
       />
       <Route
-        path="auctions/:id"
+        path="/lukso-app/auctions/:id"
         loader={({ params }) => { return params.id! }}
         lazy={
           () => import("./pages/AuctionsPage")
@@ -49,19 +49,19 @@ let routes = createRoutesFromElements(
 
 export const menu: Menu = [
   {
-    path: "/REPO",
+    path: "/lukso-app",
     description: "Home"
   },
   {
-    path: "/dispenser",
+    path: "/lukso-app/dispenser",
     description: "Dispensers"
   },
   {
-    path: "/auctions",
+    path: "/lukso-app/auctions",
     description: "Auctions"
   },
   {
-    path: "/auctions/create",
+    path: "/lukso-app/auctions/create",
     description: "Create Auctions"
   },
 
