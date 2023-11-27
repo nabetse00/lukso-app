@@ -1,5 +1,4 @@
-import { TransactionRequest, ethers } from "ethers";
-import { MockToken__factory } from '../../../typechain-types';
+import { ethers } from "ethers";
 import { AuctionFactory__factory } from '../../../typechain-types';
 import { Auction__factory } from '../../../typechain-types';
 import { AuctionItems__factory } from '../../../typechain-types';
@@ -11,7 +10,7 @@ import AuctionContractABI from '../../../artifacts/contracts/Auction.sol/Auction
 import bs58 from 'bs58'
 
 import { WalletState } from "@web3-onboard/core";
-import { FLAT_FEE_DAI, FLAT_FEE_USDC } from "../types/contracts";
+import { FLAT_FEE_USDC } from "../types/contracts";
 
 import { Buffer } from 'buffer/';
 
@@ -26,8 +25,7 @@ export async function createAuction(wallet: WalletState,
     // await token.approve(import.meta.env.VITE_TESTNET_AF_ADDR, FLAT_FEE_USDC)
     const startingPriceBN = ethers.parseEther(startingPrice.toString())
     const buyItNowBN = ethers.parseEther((buyItNow ? buyItNow : 0).toString())
-    const tokenUri = ethers.toUtf8Bytes(itemUri)
-
+    // const tokenUri = ethers.toUtf8Bytes(itemUri)
 
     let txn = await auctionFactory.createAuction(
         bidTokenAddr, signer.address, getBytes32FromIpfsHash(itemUri), startingPriceBN, buyItNowBN, duration * 3600
@@ -41,7 +39,7 @@ export async function createAuctionBatch(wallet: WalletState,
 ) {
     const provider = new ethers.BrowserProvider(wallet.provider, 'any')
     const signer = await provider.getSigner()
-    const itemOwnerAddr = await signer.getAddress()
+    // const itemOwnerAddr = await signer.getAddress()
     const startingPriceBN = ethers.parseEther(startingPrice.toString())
     const buyItNowBN = ethers.parseEther((buyItNow ? buyItNow : 0).toString())
     // const tokenUri = ethers.encodeBytes32String(itemUri)
@@ -55,16 +53,16 @@ export async function createAuctionBatch(wallet: WalletState,
     );
 
     const auctionFactoryAddress = import.meta.env.VITE_TESTNET_AF_ADDR;
-    const tokenContract = new ethers.Contract(
-        bidTokenAddr,
-        CustomTokenContractABI.abi,
-        signer,
-    );
-    const auctionContract = new ethers.Contract(
-        auctionFactoryAddress,
-        AuctionFactoryContractABI.abi,
-        signer,
-    );
+    // const tokenContract = new ethers.Contract(
+    //     bidTokenAddr,
+    //     CustomTokenContractABI.abi,
+    //     signer,
+    // );
+    // const auctionContract = new ethers.Contract(
+    //     auctionFactoryAddress,
+    //     AuctionFactoryContractABI.abi,
+    //     signer,
+    // );
 
     const MockTokenAbi = new ethers.Interface(CustomTokenContractABI.abi)
     const AuctionFactoryAbi = new ethers.Interface(AuctionFactoryContractABI.abi)
@@ -191,16 +189,16 @@ function getCidFromDataUri(data: string){
 
 
 
-function LSP2MappingBytes32(nameKey: string, val: string): string {
-    // see https://github.com/lukso-network/LIPs/blob/main/LSPs/LSP-2-ERC725YJSONSchema.md#mapping
-    const hashKeyName = keccak256(nameKey).slice(0, 2 + 10 * 2) + "0000"
-    const mapping = hashKeyName + val.slice(2, 20 * 2 + 2)
-    return mapping
-  }
+// function LSP2MappingBytes32(nameKey: string, val: string): string {
+//     // see https://github.com/lukso-network/LIPs/blob/main/LSPs/LSP-2-ERC725YJSONSchema.md#mapping
+//     const hashKeyName = keccak256(nameKey).slice(0, 2 + 10 * 2) + "0000"
+//     const mapping = hashKeyName + val.slice(2, 20 * 2 + 2)
+//     return mapping
+//   }
 
 
   
-function keccak256(val: string): string {
-    const enc = new TextEncoder()
-    return ethers.keccak256(enc.encode(val))
-  }
+// function keccak256(val: string): string {
+//     const enc = new TextEncoder()
+//     return ethers.keccak256(enc.encode(val))
+//   }

@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+// import { useLoaderData } from "react-router-dom";
 import RequireProfile from "../components/RequireUniversalProfile";
 import { getAuctionData, getAuctions } from "../utils/Auction";
 import { useConnectWallet } from "@web3-onboard/react";
-import { AuctionData, AuctionJson } from "../types/models";
+import { AuctionData } from "../types/models";
 import { getJsonData } from "../utils/IpfsHelpers";
 import AuctionComponent from "../components/AuctionComponent";
 
 
 
 export function Component() {
-    const data = useLoaderData();
+    // const data = useLoaderData();
     const [auctions, setAuctions] = useState<AuctionData[]>([])
     const [loading, setLoading] = useState(true)
     const [{ wallet }] = useConnectWallet()

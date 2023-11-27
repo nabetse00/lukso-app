@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 
 interface Props {
     endDate: Date
@@ -45,15 +45,18 @@ export default function CountDown({ endDate }: Props) {
             <div className="stat-value">
                 {!ended ?
                     <span className="countdown">
+                        {/*// @ts-ignore */}
                         <span style={{ "--value": hours }}></span>:
+                        {/*// @ts-ignore */}
                         <span style={{ "--value": minutes }}></span>:
+                        {/*// @ts-ignore */}
                         <span style={{ "--value": seconds }}></span>
                     </span>
                     :
                     <span> Ended </span>
                 }
             </div>
-            <div className="stat-desc">{!ended?"Ends on ":"Ended on "} {format_date(endDate)}</div>
-            </div>
+            <div className="stat-desc">{!ended ? "Ends on " : "Ended on "} {format_date(endDate)}</div>
+        </div>
     )
 }
