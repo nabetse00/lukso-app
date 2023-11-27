@@ -35,6 +35,10 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
+      - name: Install dependencies [hh]
+        run: npm install
+      - name: Compile contracts
+        run: npx hardhat compile
       - name: Install dependencies
         working-directory: ./frontend
         run: npm install
