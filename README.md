@@ -160,17 +160,24 @@ Tesnet addresses:
 
 verified with
 ```
-npx hardhat verify "0xc5966895Be96BE5cc6DE336B63fD41F60c75B917" --network luksoTestnet --constructor-args .\fake_usdc_arguments.js
+npx hardhat verify "0xc5966895Be96BE5cc6DE336B63fD41F60c75B917" --network luksoTestnet --constructor-args ./fake_usdc_arguments.js
 ```
 
 - MOCK DAI: [0x1dBC835aA6f1889842dE9e0e2a64E54d15C62a11](https://explorer.execution.testnet.lukso.network/address/0x1dBC835aA6f1889842dE9e0e2a64E54d15C62a11)
 
 ```
-npx hardhat verify "0x1dBC835aA6f1889842dE9e0e2a64E54d15C62a11" --network luksoTestnet --constructor-args .\fake_dai_arguments.js 
+npx hardhat verify "0x1dBC835aA6f1889842dE9e0e2a64E54d15C62a11" --network luksoTestnet --constructor-args ./fake_dai_arguments.js 
 ```
 - Auction Factory: [0x0BC186C5A0bC200958aaA3c8c10C02590D874aEf](https://explorer.execution.testnet.lukso.network/address/0x0BC186C5A0bC200958aaA3c8c10C02590D874aEf)
 ```
-npx hardhat verify "0x0BC186C5A0bC200958aaA3c8c10C02590D874aEf" --network luksoTestnet --constructor-args .\auction_factory_arguments.js
+npx hardhat verify "0x0BC186C5A0bC200958aaA3c8c10C02590D874aEf" --network luksoTestnet --constructor-args ./auction_factory_arguments.js
+```
+
+- Auction items [created by AuctionFactory contract] 
+[0x0BC186C5A0bC200958aaA3c8c10C02590D874aEf](https://explorer.execution.testnet.lukso.network/address/0x0BC186C5A0bC200958aaA3c8c10C02590D874aEf)
+
+```
+npx hardhat verify "0xb8608C56509f880E5b071ad31019ed2c42D5BC98" --network luksoTestnet --constructor-args ./auction_items_arguments.js 
 ```
 
 # Front end
