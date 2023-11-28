@@ -174,7 +174,7 @@ npx hardhat verify "0x0BC186C5A0bC200958aaA3c8c10C02590D874aEf" --network luksoT
 ```
 
 - Auction items [created by AuctionFactory contract] 
-[0x0BC186C5A0bC200958aaA3c8c10C02590D874aEf](https://explorer.execution.testnet.lukso.network/address/0x0BC186C5A0bC200958aaA3c8c10C02590D874aEf)
+[0xb8608C56509f880E5b071ad31019ed2c42D5BC98](https://explorer.execution.testnet.lukso.network/address/0xb8608C56509f880E5b071ad31019ed2c42D5BC98)
 
 ```
 npx hardhat verify "0xb8608C56509f880E5b071ad31019ed2c42D5BC98" --network luksoTestnet --constructor-args ./auction_items_arguments.js 
