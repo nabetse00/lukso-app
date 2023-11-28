@@ -35,7 +35,7 @@ export default function AuctionComponent({ auction, update }: Props) {
 
     function format_address(value: string) {
         const length = 4
-        return `${value.slice(0, length+2)}...${value.slice(value.length - length, value.length)}`
+        return `${value.slice(0, length + 2)}...${value.slice(value.length - length, value.length)}`
 
     }
 
@@ -48,7 +48,7 @@ export default function AuctionComponent({ auction, update }: Props) {
                 setEnded(true)
             }
 
-            if(Number(auction.status) == 2){
+            if (Number(auction.status) == 2) {
                 setEnded(true)
             }
 
@@ -97,11 +97,11 @@ export default function AuctionComponent({ auction, update }: Props) {
             <div className="card-body">
                 <h2 className="card-title">
                     <div className="flex flex-col">
-                    {auction.data.product_name}
-                    <div className="flex">
-                    <div className="badge badge-secondary">Seller: {format_address(auction.seller)}</div>
-                    <div className="badge badge-primary">Winner: {format_address(auction.highestBider)}</div>
-                    </div>
+                        {auction.data.product_name}
+                        <div className="flex">
+                            <div className="badge badge-secondary">Seller: {format_address(auction.seller)}</div>
+                            <div className="badge badge-primary">Winner: {format_address(auction.highestBider)}</div>
+                        </div>
                     </div>
                 </h2>
                 <p>{auction.data.product_description}</p>
@@ -119,27 +119,26 @@ export default function AuctionComponent({ auction, update }: Props) {
                 <div className="card-actions justify-end">
                     {
                         wallet?.accounts[0].address != auction.seller ?
-                        <>
-                        {auction.min_imcrement}
-                    <span> Your current bid is: {auction.bidderBid}</span>
-                    <span className="">Max {bal} tokens</span>
-                    <input type="number"
-                    step="0.01"
-                    min={Number(auction.bid) + Number(auction.min_imcrement)}
-                    max={bal}
-                    className="input input-bordered input-primary"
-                    value={bid}
-                    onChange={(e) => { setBid(e.target.value) }} />
+                            <>
+                                <span> Your current bid is: {auction.bidderBid}</span>
+                                <span className="">Max {bal} tokens</span>
+                                <input type="number"
+                                    step="0.01"
+                                    min={Number(auction.bid) + Number(auction.min_imcrement)}
+                                    max={bal}
+                                    className="input input-bordered input-primary"
+                                    value={bid}
+                                    onChange={(e) => { setBid(e.target.value) }} />
 
-                    <button disabled={ended || (Number(bid) > Number(bal))} onClick={() => handlePlaceBid()} className="btn btn-primary btn-outline" >Place a Bid</button>
-                    {Number(auction.data.product_buy_it_price) > 0 &&
-                        <button onClick={() => handleBuyItNow()} className="btn btn-primary btn-outline" disabled={ended || (Number(auction.data.product_buy_it_price) > Number(bal))}  >Buy Now for {format_price(auction.data.product_buy_it_price)}</button>
+                                <button disabled={ended || (Number(bid) > Number(bal))} onClick={() => handlePlaceBid()} className="btn btn-primary btn-outline" >Place a Bid</button>
+                                {Number(auction.data.product_buy_it_price) > 0 &&
+                                    <button onClick={() => handleBuyItNow()} className="btn btn-primary btn-outline" disabled={ended || (Number(auction.data.product_buy_it_price) > Number(bal))}  >Buy Now for {format_price(auction.data.product_buy_it_price)}</button>
+                                }
+                                <button onClick={() => handleWithdraw()} className="btn btn-primary btn-outline" disabled={!ended}>Withdraw</button>
+                            </>
+                            :
+                            <p>You are the auction seller</p>
                     }
-                    <button onClick={() => handleWithdraw()} className="btn btn-primary btn-outline" disabled={!ended}>Withdraw</button>
-                    </>
-                    :
-                    <p>You are the auction seller</p>
-                }
                 </div>
             </div>
         </div>
