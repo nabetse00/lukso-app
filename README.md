@@ -40,7 +40,9 @@ In order to prevent users to leak private keys, this project includes the `doten
 To use it, copy `.env.template` to `.env` and fill it with your data.
 
 ```
+...
 TESTNET_EOA_PRIVATE_KEY=123cde574ccff....
+...
 ```
 
 For hardhat localnet deployment copy `.env.dev.template` to `.env.dev` and fill it with your data.
