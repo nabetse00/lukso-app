@@ -33,6 +33,7 @@ export type AuctionData = {
   min_imcrement: string;
   token: string;
   status:string;
+  highestBider: string
 }
 
 export interface AuctionJson {

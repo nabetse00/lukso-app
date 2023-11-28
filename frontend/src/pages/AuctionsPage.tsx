@@ -20,7 +20,7 @@ export function Component() {
         const auctionsData: AuctionData[] = []
         for (let index = 0; index < auctions.length; index++) {
             const addr = auctions[index];
-            const [uri, bid, bidder, seller, tokenAddr, increment, bider_bid, status] = await getAuctionData(wallet!, addr)
+            const [uri, bid, bidder, seller, tokenAddr, increment, bider_bid, status, highestBider] = await getAuctionData(wallet!, addr)
             const json = await getJsonData(uri)
             auctionsData.push(
                 {
@@ -33,7 +33,8 @@ export function Component() {
                     bidderBid: bider_bid,
                     min_imcrement: increment,
                     token: tokenAddr,
-                    status:status
+                    status:status,
+                    highestBider:highestBider
                 })
         }
         setAuctions(auctionsData)
@@ -42,7 +43,7 @@ export function Component() {
 
     async function updateAuction(addr: string) {
 
-        const [uri, bid, bidder, seller, tokenAddr, increment, bider_bid, status] = await getAuctionData(wallet!, addr)
+        const [uri, bid, bidder, seller, tokenAddr, increment, bider_bid, status, highestBider] = await getAuctionData(wallet!, addr)
 
         const new_auctions = [...auctions]
 
@@ -61,7 +62,8 @@ export function Component() {
                     bidderBid: bider_bid,
                     min_imcrement: increment,
                     token: tokenAddr,
-                    status: status
+                    status: status,
+                    highestBider: highestBider
                 }
             }
         )
@@ -72,11 +74,11 @@ export function Component() {
     useEffect(
         () => {
 
-            if (auctions.length == 0) {
+            // if (auctions.length == 0) {
                 getAuctionsData().then(
                     () => console.log("Auctions loaded")
                 )
-            }
+            //}
         },
         [wallet?.provider]
     )

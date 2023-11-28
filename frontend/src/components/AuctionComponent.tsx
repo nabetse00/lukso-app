@@ -34,8 +34,8 @@ export default function AuctionComponent({ auction, update }: Props) {
     }
 
     function format_address(value: string) {
-        const length = 8
-        return `${value.slice(0, length)}...${value.slice(value.length - length, value.length)}`
+        const length = 4
+        return `${value.slice(0, length+2)}...${value.slice(value.length - length, value.length)}`
 
     }
 
@@ -54,7 +54,7 @@ export default function AuctionComponent({ auction, update }: Props) {
 
 
             if (bid.length == 0) {
-                const initial = ethers.parseEther(auction.min_imcrement) + ethers.parseEther(auction.bidderBid)
+                const initial = ethers.parseEther(auction.min_imcrement) + ethers.parseEther(auction.bid)
                 setBid(ethers.formatEther(initial))
             }
         }
@@ -96,8 +96,13 @@ export default function AuctionComponent({ auction, update }: Props) {
             <figure className="md:max-h-fit max-h-48 p-2"><img className="object-cover" src={`${gatewayIpfsUrl(auction.data.product_picture)}`} alt={`${auction.data.product_name} image`} /></figure>
             <div className="card-body">
                 <h2 className="card-title">
+                    <div className="flex flex-col">
                     {auction.data.product_name}
-                    <div className="badge badge-secondary">{format_address(auction.seller)}</div>
+                    <div className="flex">
+                    <div className="badge badge-secondary">Seller: {format_address(auction.seller)}</div>
+                    <div className="badge badge-primary">Winner: {format_address(auction.highestBider)}</div>
+                    </div>
+                    </div>
                 </h2>
                 <p>{auction.data.product_description}</p>
                 <p>{format_price(auction.data.product_buy_it_price)}</p>
@@ -112,22 +117,29 @@ export default function AuctionComponent({ auction, update }: Props) {
 
 
                 <div className="card-actions justify-end">
-
-                    <span className="label-text">Max {bal} tokens</span>
-
+                    {
+                        wallet?.accounts[0].address != auction.seller ?
+                        <>
+                        {auction.min_imcrement}
+                    <span> Your current bid is: {auction.bidderBid}</span>
+                    <span className="">Max {bal} tokens</span>
                     <input type="number"
-                        step="0.01"
-                        min={Number(auction.bid) + Number(auction.min_imcrement)}
-                        max={bal}
-                        className="input input-bordered input-primary"
-                        value={bid}
-                        onChange={(e) => { setBid(e.target.value) }} />
+                    step="0.01"
+                    min={Number(auction.bid) + Number(auction.min_imcrement)}
+                    max={bal}
+                    className="input input-bordered input-primary"
+                    value={bid}
+                    onChange={(e) => { setBid(e.target.value) }} />
 
                     <button disabled={ended || (Number(bid) > Number(bal))} onClick={() => handlePlaceBid()} className="btn btn-primary btn-outline" >Place a Bid</button>
                     {Number(auction.data.product_buy_it_price) > 0 &&
                         <button onClick={() => handleBuyItNow()} className="btn btn-primary btn-outline" disabled={ended || (Number(auction.data.product_buy_it_price) > Number(bal))}  >Buy Now for {format_price(auction.data.product_buy_it_price)}</button>
                     }
                     <button onClick={() => handleWithdraw()} className="btn btn-primary btn-outline" disabled={!ended}>Withdraw</button>
+                    </>
+                    :
+                    <p>You are the auction seller</p>
+                }
                 </div>
             </div>
         </div>

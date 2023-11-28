@@ -109,10 +109,11 @@ export async function getAuctionData(wallet: WalletState, auctionAddr: string): 
     const seller = (await auction.config()).owner
     const tokenAddr = await auction.bidToken()
     const increment = ethers.formatEther(await auction.getMinimalIncrementTokens())
-    const bider_bid = ethers.formatEther(await auction.fundsByBidder(bidder))
+    const bider_bid = ethers.formatEther(await auction.fundsByBidder(signer.address))
     const status = (await auction.auctionStatus()).toString()
+    const highestBidder = (await auction.highestBidder())
 
-    return [getCidFromDataUri(tokenUriData), bid, bidder, seller, tokenAddr, increment, bider_bid, status]
+    return [getCidFromDataUri(tokenUriData), bid, bidder, seller, tokenAddr, increment, bider_bid, status, highestBidder]
 }
 
 export async function placeBid(wallet: WalletState, auctionAddr: string, tokenAddr:string, bidAmount:string, biderBid:string){
