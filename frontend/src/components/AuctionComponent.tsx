@@ -6,7 +6,6 @@ import { ethers } from "ethers";
 import { getAuctionData, placeBid, withdrawAll } from "../utils/Auction";
 import { useConnectWallet } from "@web3-onboard/react";
 import { getBlances } from "../utils/MockToken";
-import { updateAccount } from "@web3-onboard/core/dist/store/actions";
 
 interface Props {
     auctionInit: AuctionData
