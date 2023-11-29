@@ -160,7 +160,8 @@ export async function withdrawAll(wallet: WalletState, addr: string){
     const provider = new ethers.BrowserProvider(wallet.provider, 'any')
     const signer = await provider.getSigner()
     const auction = Auction__factory.connect(addr, signer)
-    await auction.withdrawAll()
+    const txn = await auction.withdrawAll()
+    return txn 
 }
 
 

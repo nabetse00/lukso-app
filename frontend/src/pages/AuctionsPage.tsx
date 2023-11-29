@@ -88,7 +88,7 @@ export function Component() {
             {loading && <span className="loading loading-dots loading-lg"></span>}
                 {
                     auctions.map(
-                        v => <AuctionComponent key={v.addr} auction={v} update={updateAuction} />
+                        v => <AuctionComponent key={v.addr} auctionInit={v} update={updateAuction} />
                     )
                 }
             </div>
