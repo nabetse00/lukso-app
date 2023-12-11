@@ -184,7 +184,7 @@ npx hardhat verify "0xb8608C56509f880E5b071ad31019ed2c42D5BC98" --network luksoT
 
 # Front end
 
-Check [REAME](./frontend/README.md) inside `./frontend` folder.
+Check [README](./frontend/README.md) inside `./frontend` folder.
 
 Demo web site is also deployed [here](https://nabetse00.github.io/lukso-app/)
 
